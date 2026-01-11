@@ -85,5 +85,5 @@ export class ProductListComponent implements OnInit {
       error: (err) => console.error('Error logging action', err)
     });
   }
-  
+
 }
