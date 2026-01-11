@@ -15,7 +15,7 @@ import { AppHeader } from "../shared/app-header";
       <main class="container">
         <section class="product-grid" id="productGrid">
     
-          @for(product of products(); track product?.id) {
+          @for(product of products(); track product?.productId) {
 
             <div class="product-card" data-id="1">
                 <div class="product-image">
@@ -32,8 +32,8 @@ import { AppHeader } from "../shared/app-header";
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-action view-btn" title="View Product"><i class="fas fa-eye"></i> View</button>
-                        <button class="btn btn-action fav-btn" title="Add to Favorites"><i class="fas fa-heart"></i> Favorite</button>
+                        <button class="btn btn-action view-btn" (click)="onProductClick(product, 'VIEW')" title="View Product"><i class="fas fa-eye"></i> View</button>
+                        <button class="btn btn-action fav-btn" (click)="onProductClick(product, 'FAVOURITE')" title="Add to Favorites"><i class="fas fa-heart"></i> Favorite</button>
                     </div>
                     <button class="btn btn-primary btn-full">Add to Cart</button>
                 </div>
@@ -65,21 +65,19 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts().subscribe({
       next: (data) => {
         this.products.set(data);
-        console.log(`Display products \n ${JSON.stringify(data)}`);
       },
       error: (err) => console.error('Error fetching products', err)
     });
   }
 
-  onProductClick(product: Product): void {
+  onProductClick(product: Product, type: string): void {
     // Open modal via ViewChild
-    this.detailModal.open(product);
-
+    const _throw = type == 'VIEW' ? this.detailModal.open(product) : 'FAVOURITE'
     // Log VIEW action
     const action: UserAction = {
-      productId: product.id.toString(),
+      productId: product.productId,
       userId: this.sessionService.getUserId(),
-      actionType: 'VIEW'
+      actionType: type == 'VIEW' ? 'VIEW' : 'FAVOURITE'
     };
 
     this.productService.logUserAction(action).subscribe({
@@ -87,4 +85,5 @@ export class ProductListComponent implements OnInit {
       error: (err) => console.error('Error logging action', err)
     });
   }
+  
 }

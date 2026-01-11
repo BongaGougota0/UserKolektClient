@@ -17,6 +17,6 @@ export class ProductService {
   }
 
   logUserAction(action: UserAction): Observable<UserAction> {
-    return this.http.post<UserAction>(`${this.baseUrl}/user-actions`, action);
+    return this.http.post<UserAction>(`${this.baseUrl}/users/product-view`, action);
   }
 }
