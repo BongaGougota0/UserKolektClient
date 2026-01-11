@@ -7,9 +7,6 @@ import { ProductListComponent } from './components/product-list';
   standalone: true,
   imports: [RouterOutlet, ProductListComponent],
   template: `
-    <header>
-      <h1>UserKolekt Client</h1>
-    </header>
     <main>
       <app-product-list></app-product-list>
     </main>
