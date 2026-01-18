@@ -4,26 +4,30 @@
     <p class="auth__subtitle">Join us today</p>
   </div>
 
-  <form class="auth__form">
+  <form [formGroup]="registerForm" class="auth__form" (ngSubmit)="onSubmit()">
     <div class="auth__form-group">
       <label for="email" class="auth__label">Email</label>
-      <input type="email" id="email" class="auth__input" placeholder="Enter your email" required />
+      <input
+      formControlName="email"
+       type="email" id="email" class="auth__input" placeholder="Enter your email" required />
     </div>
 
     <div class="auth__form-group">
       <label for="username" class="auth__label">Username</label>
       <input
-        type="text"
-        id="username"
-        class="auth__input"
-        placeholder="Choose a username"
-        required
+      formControlName="username"
+      type="text"
+      id="username"
+      class="auth__input"
+      placeholder="Choose a username"
+      required
       />
     </div>
-
+    
     <div class="auth__form-group">
-      <label for="password" class="auth__label">Password</label>
-      <input
+        <label for="password" class="auth__label">Password</label>
+        <input
+        formControlName="password"
         type="password"
         id="password"
         class="auth__input"

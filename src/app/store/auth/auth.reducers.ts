@@ -18,7 +18,8 @@ export const authReducers = createReducer(
         userId: userId,
         jwt: authorization,
         isLoggedIn: true,
-        isloading: false
+        isloading: false,
+        error: ''
     })),
 
     on(authActions.loginUserFailure, (state) => ({

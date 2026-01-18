@@ -18,8 +18,8 @@ export class AuthEffects {
             ofType(authActions.loginUser),
             mergeMap((loginDetails) => this.authService.loginUser(loginDetails.email, loginDetails.password).pipe(
             map((response: HttpResponse<any>) => {
-                const authorization = response.headers.get('Authorization');
-                const userId = response.headers.get('UserId');
+                const authorization = response.headers?.get('authorization');
+                const userId = response.headers?.get('Userid');
                 if(userId && authorization) {
                     const headerData = {
                         authorization,
@@ -31,6 +31,7 @@ export class AuthEffects {
                 }
             },
             catchError((error) => {
+                console.log(`Trying to login`);
                return of(authActions.loginUserFailure(error))
             })
         ))
@@ -43,7 +44,7 @@ export class AuthEffects {
             tap(resp => {
                 localStorage.setItem("Authorization", resp.authorization);
                 localStorage.setItem("userId", resp.userId);
-                this.router.navigate(['/home']);
+                this.router.navigate(['/']);
             })
         )
     },{dispatch: false});

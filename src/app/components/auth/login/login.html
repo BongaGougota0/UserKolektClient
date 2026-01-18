@@ -4,15 +4,19 @@
     <p class="auth__subtitle">Please login to your account</p>
   </div>
 
-  <form class="auth__form">
+  <form [formGroup]="loginForm" class="auth__form">
     <div class="auth__form-group">
       <label for="email" class="auth__label">Email</label>
-      <input type="email" id="email" class="auth__input" placeholder="Enter your email" required />
+      <input
+       type="email"
+       formControlName="email"
+        id="email" class="auth__input" placeholder="Enter your email" required />
     </div>
 
     <div class="auth__form-group">
       <label for="password" class="auth__label">Password</label>
       <input
+      formControlName="password"
         type="password"
         id="password"
         class="auth__input"
@@ -21,7 +25,7 @@
       />
     </div>
 
-    <button type="submit" class="auth__button">Login</button>
+    <button (click)="onSubmit()" type="submit" class="auth__button">Login</button>
   </form>
 
   <div class="auth__divider">or</div>

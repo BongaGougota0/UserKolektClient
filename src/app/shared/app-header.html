@@ -5,9 +5,12 @@
             <p class="description">learnig reactive applications development.</p>
         </div>
         <nav class="auth-nav">
-            <button (click)="navigate('/login')" class="btn btn-outline" id="loginBtn">Login</button>
-            <button (click)="navigate('/register')" class="btn btn-primary" id="signupBtn">Sign Up</button>
-            <button (click)="navigate('/')" class="btn btn-outline hidden" id="logoutBtn">Logout</button>
+            @if(isAuthenticated) {
+                <button (click)="navigate('/')" class="btn btn-outline hidden" id="logoutBtn">Logout</button>
+            } @else {
+                <button (click)="navigate('/login')" class="btn btn-outline" id="loginBtn">Login</button>
+                <button (click)="navigate('/register')" class="btn btn-primary" id="signupBtn">Sign Up</button>
+            }
         </nav>
     </div>
 </header>

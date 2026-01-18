@@ -34,7 +34,12 @@ export class AuthService {
   constructor(private http: HttpClient){}
 
   loginUser(email: string, password: string) : Observable<any> {
-    return this.http.post<any>(`${environment.baseUrl}/auth/login`, {email, password});
+    return this.http.post<any>(`${environment.baseUrl}/auth/login`, {email, password},
+      { 
+      headers: { 'Content-Type': 'application/json' },
+      observe: 'response'
+      }
+    );
   }
 
   register(user: UserEntity) : Observable<any> {
